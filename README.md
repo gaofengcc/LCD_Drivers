@@ -1,17 +1,25 @@
-# LCD_Drivers
+# LCD_Drivers / esp32_ILI9488
 
-ILI9488 (320x480) LCD + XPT2046 touch driver. Layered design for ESP32, STM32, Linux, etc.
+ESP32 平台 ILI9488 (320x480) LCD + XPT2046 触摸驱动, 分层架构便于移植.
 
-## ESP-IDF
+本分支 `esp32_ILI9488` 为 ESP32-S3 平台实现.
 
-Add as component dir or git submodule at `source/drivers/LCD35`:
+## ESP-IDF 使用
+
+作为 git submodule 置于 `source/drivers/LCD35`:
 
 ```cmake
 list(APPEND EXTRA_COMPONENT_DIRS "source/drivers/LCD35")
 ```
 
-App component: `REQUIRES LCD35`.
+业务组件: `REQUIRES LCD35`.
 
-## Config
+克隆指定分支:
 
-Edit `include/lcd_config.h` and `include/touch_config.h`.
+```bash
+git submodule update --init --remote source/drivers/LCD35
+```
+
+## 引脚配置
+
+编辑 `include/lcd_config.h` 与 `include/touch_config.h`.
