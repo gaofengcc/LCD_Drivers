@@ -77,9 +77,17 @@ void lcd_driver_clear(uint16_t color);
 /**
  * @brief 设置显示方向
  *
- * @param dir 显示方向
+ * @param dir LCD_DIR_0 / LCD_DIR_90 / LCD_DIR_180 / LCD_DIR_270
+ * @note 切换后宽高会变化, 需调用方重绘; 触摸坐标需另行校准
  */
 void lcd_driver_set_direction(lcd_dir_t dir);
+
+/**
+ * @brief 获取当前显示方向
+ *
+ * @return LCD_DIR_0 ~ LCD_DIR_270, 未初始化时返回 LCD_DIR_0
+ */
+lcd_dir_t lcd_driver_get_direction(void);
 
 /**
  * @brief 获取LCD宽度

@@ -98,11 +98,30 @@ void lcd_driver_clear(uint16_t color)
 
 /**
  * @brief 设置显示方向
+ *
+ * @param dir LCD_DIR_0 / LCD_DIR_90 / LCD_DIR_180 / LCD_DIR_270
+ * @note 切换方向后需自行重绘画面; 未初始化或非法 dir 时忽略
  */
 void lcd_driver_set_direction(lcd_dir_t dir)
 {
-    /* 通过重置核心层并重新初始化来实现方向切换 */
-    /* 实际实现需要在lcd_core.c中添加方向设置支持 */
+    if (!s_initialized) {
+        return;
+    }
+    if ((uint8_t)dir > 3U) {
+        return;
+    }
+
+    lcd_core_set_direction((uint8_t)dir);
+}
+
+/**
+ * @brief 获取当前显示方向
+ *
+ * @return 当前方向枚举
+ */
+lcd_dir_t lcd_driver_get_direction(void)
+{
+    return (lcd_dir_t)lcd_core_get_direction();
 }
 
 /**

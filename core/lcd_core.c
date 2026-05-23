@@ -183,6 +183,36 @@ static void lcd_set_direction(uint8_t direction)
     lcddev.dir = direction;
 }
 
+/**
+ * @brief 设置显示方向 (运行时)
+ *
+ * @param direction 0~3, 与 LCD_DIR_0 / 90 / 180 / 270 对应
+ */
+void lcd_core_set_direction(uint8_t direction)
+{
+    if (!lcd_initialized) {
+        return;
+    }
+    if (direction > 3U) {
+        return;
+    }
+    if (lcddev.dir == direction) {
+        return;
+    }
+
+    lcd_set_direction(direction);
+}
+
+/**
+ * @brief 获取当前显示方向
+ *
+ * @return 0~3, 未初始化时返回 0
+ */
+uint8_t lcd_core_get_direction(void)
+{
+    return lcddev.dir;
+}
+
 /*===========================================================================*/
 /* 对外API函数实现                                                            */
 /*===========================================================================*/
